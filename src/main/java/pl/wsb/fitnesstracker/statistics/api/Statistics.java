@@ -20,7 +20,7 @@ public class Statistics {
     @Nullable
     private Long id;
 
-    // relacja 1-1 z użytkownikiem
+
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;

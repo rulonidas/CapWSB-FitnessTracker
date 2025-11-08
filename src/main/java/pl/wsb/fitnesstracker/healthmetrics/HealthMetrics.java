@@ -1,0 +1,52 @@
+package pl.wsb.fitnesstracker.healthmetrics;
+
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import pl.wsb.fitnesstracker.user.api.User;
+
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "health_metrics")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(exclude = "user")
+public class HealthMetrics {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // ManyToOne – wiele rekordów zdrowotnych dla jednego użytkownika
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @Column(nullable = false)
+    private LocalDate date;
+
+    // wrappery, żeby mogły być NULL, jeśli user czegoś nie poda
+    @Column(nullable = true)
+    private Double weight;
+
+    @Column(nullable = true)
+    private Double height;
+
+    @Column(name = "heart_rate", nullable = true)
+    private Integer heartRate;
+
+    public HealthMetrics(User user,
+                         LocalDate date,
+                         Double weight,
+                         Double height,
+                         Integer heartRate) {
+        this.user = user;
+        this.date = date;
+        this.weight = weight;
+        this.height = height;
+        this.heartRate = heartRate;
+    }
+}
