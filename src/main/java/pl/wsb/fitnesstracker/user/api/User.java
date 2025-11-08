@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import pl.wsb.fitnesstracker.statistics.api.Statistics;
 
 import java.time.LocalDate;
 
@@ -16,6 +17,8 @@ import java.time.LocalDate;
 @ToString
 public class User {
 
+    private final String firstName;
+    private final String lastname;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
@@ -27,12 +30,16 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @OneToOne
+    private Statistics statistics;
+
     public User(
             final String firstName,
             final String lastName,
             final LocalDate birthdate,
             final String email) {
-
+        this.firstName = firstName;
+        this.lastname = lastName;
         this.birthdate = birthdate;
         this.email = email;
     }
