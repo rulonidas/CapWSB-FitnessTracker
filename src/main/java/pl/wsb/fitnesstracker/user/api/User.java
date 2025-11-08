@@ -17,8 +17,6 @@ import java.time.LocalDate;
 @ToString
 public class User {
 
-    private final String firstName;
-    private final String lastname;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
@@ -38,8 +36,6 @@ public class User {
             final String lastName,
             final LocalDate birthdate,
             final String email) {
-        this.firstName = firstName;
-        this.lastname = lastName;
         this.birthdate = birthdate;
         this.email = email;
     }
