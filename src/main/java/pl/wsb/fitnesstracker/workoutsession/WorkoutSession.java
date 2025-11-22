@@ -14,7 +14,7 @@ import java.util.Date;
 public class WorkoutSession {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
 
@@ -25,7 +25,7 @@ public class WorkoutSession {
     @Column(name = "training_id", nullable = false)
     private Long trainingId;
 
-    @Temporal(TemporalType.TIMESTAMP)
+
     @Column(name = "timestamp", nullable = false)
     private Date timestamp;
 

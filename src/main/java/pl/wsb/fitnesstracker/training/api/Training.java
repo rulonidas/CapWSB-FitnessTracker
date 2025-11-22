@@ -16,7 +16,7 @@ import java.util.Date;
 public class Training {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
 
@@ -27,11 +27,11 @@ public class Training {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @Temporal(TemporalType.TIMESTAMP)
+
     @Column(name = "start_time", nullable = false)
     private Date startTime;
 
-    @Temporal(TemporalType.TIMESTAMP)
+
     @Column(name = "end_time", nullable = false)
     private Date endTime;
 
