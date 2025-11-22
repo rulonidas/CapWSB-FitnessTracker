@@ -46,5 +46,6 @@ public class WorkoutSession {
         this.endLatitude = endLatitude;
         this.endLongitude = endLongitude;
         this.altitude = altitude;
+
     }
 }
