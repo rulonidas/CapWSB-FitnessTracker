@@ -1,26 +1,35 @@
 package pl.wsb.fitnesstracker.training.api;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
 
 import java.util.Date;
 
+@Entity
+@Table(name = "trainings")
 @Getter
 public class Training {
-
+    @Id
     private Long id;
 
+    @ManyToOne
     private User user;
 
+    @Column
     private Date startTime;
 
+    @Column
     private Date endTime;
-
+    @Enumerated
+    @Column(name = "activity_type", nullable = false)
     private ActivityType activityType;
 
+    @Column
     private double distance;
 
+    @Column
     private double averageSpeed;
 
     public Training(

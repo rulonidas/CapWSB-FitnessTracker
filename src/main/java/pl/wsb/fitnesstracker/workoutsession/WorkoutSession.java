@@ -1,6 +1,14 @@
 package pl.wsb.fitnesstracker.workoutsession;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Getter;
+
+@Entity
+@Table(name = "workout_session")
+@Getter
+
 
 // TODO: Define the Event entity with appropriate fields and annotations
 public class WorkoutSession {
