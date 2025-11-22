@@ -1,11 +1,14 @@
 package pl.wsb.fitnesstracker.training.api;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
 
 import java.util.Date;
-
+@Entity
+@Table(name = "trainings")
 @Getter
 public class Training {
 
