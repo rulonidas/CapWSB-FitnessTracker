@@ -1,63 +1,43 @@
 package pl.wsb.fitnesstracker.workoutsession;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.wsb.fitnesstracker.training.api.Training;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "workout_session")
 @Getter
-
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class WorkoutSession {
 
     @Id
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    @Transient
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "training_id", nullable = false)
     private Training training;
 
-
-    @Column(name = "training_id", nullable = false)
-    private Long trainingId;
-
-
     @Column(name = "timestamp", nullable = false)
-    private Date timestamp;
+    private LocalDateTime timestamp;
 
-    @Column(name = "start_latitude")
+    @Column(name = "start_latitude", nullable = false)
     private double startLatitude;
 
-    @Column(name = "start_longitude")
+    @Column(name = "start_longitude", nullable = false)
     private double startLongitude;
 
     @Column(name = "end_latitude")
-    private double endLatitude;
+    private Double endLatitude;
 
     @Column(name = "end_longitude")
-    private double endLongitude;
+    private Double endLongitude;
 
     @Column(name = "altitude")
-    private double altitude;
+    private Double altitude;
 
-    public WorkoutSession(
-            Training training,
-            Date timestamp,
-            double startLatitude,
-            double startLongitude,
-            double endLatitude,
-            double endLongitude,
-            double altitude) {
-        this.training = training;
-        this.timestamp = timestamp;
-        this.startLatitude = startLatitude;
-        this.startLongitude = startLongitude;
-        this.endLatitude = endLatitude;
-        this.endLongitude = endLongitude;
-        this.altitude = altitude;
-    }
 }
