@@ -1,5 +1,5 @@
 # LABORATORIUM 04 - Spring Boot - Tworzenie sieciowego API CRUD
-# testtest
+
 **Uwaga - Przed przystapieniem do zadania proszę o wykonanie zadania LAB01/02/03 (poprzednie zajęcia).**
 Zsynchronizuj swoje repozytorium z repozytorium prowadzącego (Sync Fork bądź Pull z repozytorium prowadzącego). Można
 wykonać to bezpośrednio w GitHubie lub lokalnie.

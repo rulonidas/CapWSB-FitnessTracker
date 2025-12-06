@@ -44,14 +44,12 @@ class InitialDataLoader {
     public void loadInitialData(ContextRefreshedEvent event) {
         verifyDependenciesAutowired();
 
-        AtomicReference<Logger> log = null;
-        log.get().info("Loading initial data to the database");
 
         List<User> sampleUserList = generateSampleUsers();
         List<Training> sampleTrainingList = generateTrainingData(sampleUserList);
 
 
-        log.get().info("Finished loading initial data");
+
     }
 
     private User generateUser(String name, String lastName, int age) {
