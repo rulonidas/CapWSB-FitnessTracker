@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.wsb.fitnesstracker.user.api.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -19,9 +20,9 @@ class UserController {
     private final UserServiceImpl userService;
     private final UserMapper userMapper;
 
-    @GetMapping("/older-than")
-    public List<UserDto> getUsersOlderThan(@RequestParam int age) {
-        return userService.findUsersOlderThan(age)
+    @GetMapping("/older/{time}")
+    public List<UserDto> getUsersOlderThan(@PathVariable LocalDate time) {
+        return userService.findOlderThan(time)
                 .stream()
                 .map(userMapper::toDto)
                 .toList();

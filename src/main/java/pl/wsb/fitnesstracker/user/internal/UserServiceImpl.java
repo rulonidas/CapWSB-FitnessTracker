@@ -70,12 +70,10 @@ class UserServiceImpl implements UserService, UserProvider {
 
 
 
-    public List<User> findUsersOlderThan(int age) {
-        if (age < 0) {
-            throw new IllegalArgumentException("Age must be >= 0");
-        }
-
-        LocalDate cutoffDate = LocalDate.now().minusYears(age);
-        return userRepository.findByBirthdateBefore(cutoffDate);
+    public List<User> findOlderThan(LocalDate date) {
+        return userRepository.findAll()
+                .stream()
+                .filter(user -> user.getBirthdate().isBefore(date))
+                .toList();
     }
 }
