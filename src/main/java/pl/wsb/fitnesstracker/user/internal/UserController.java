@@ -5,8 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserDto;
 import pl.wsb.fitnesstracker.user.api.UserSimpleDto;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -36,9 +38,12 @@ class UserController {
                 .stream()
                 .map(userMapper::toSimpleDto)
                 .toList();
-
     }
-
+    @GetMapping("/{id}")
+    public UserDto getUserById(@PathVariable Long id){
+        User user = userService.findById(id);
+        return userMapper.toDto(user);
+    }
 
 
 
