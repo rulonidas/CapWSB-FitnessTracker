@@ -3,8 +3,10 @@ package pl.wsb.fitnesstracker.user.internal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.wsb.fitnesstracker.user.api.UserDto;
+import pl.wsb.fitnesstracker.user.api.UserSimpleDto;
 
 import java.util.List;
 
@@ -18,8 +20,8 @@ import java.util.List;
 class UserController {
 
     private final UserServiceImpl userService;
-
     private final UserMapper userMapper;
+
 
     @GetMapping
     public List<UserDto> getAllUsers() {
@@ -28,5 +30,17 @@ class UserController {
                 .map(userMapper::toDto)
                 .toList();
     }
+    @GetMapping("/simple")
+    public List<UserSimpleDto> getAllSimpleUsers() {
+        return userService.findAllUsers()
+                .stream()
+                .map(userMapper::toSimpleDto)
+                .toList();
+
+    }
+
+
+
+
 }
 
