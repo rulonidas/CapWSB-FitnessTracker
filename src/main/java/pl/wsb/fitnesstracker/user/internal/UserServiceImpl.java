@@ -10,6 +10,12 @@ import pl.wsb.fitnesstracker.user.api.UserService;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+import java.util.List;
+import java.time.LocalDate;
+
 
 @Service
 @RequiredArgsConstructor
@@ -56,5 +62,16 @@ class UserServiceImpl implements UserService, UserProvider {
                         user.getEmail().toLowerCase()
                                 .contains(email.toLowerCase()))
                 .toList();
+    }
+
+
+
+    public List<User> findUsersOlderThan(int age) {
+        if (age < 0) {
+            throw new IllegalArgumentException("Age must be >= 0");
+        }
+
+        LocalDate cutoffDate = LocalDate.now().minusYears(age);
+        return userRepository.findByBirthdateBefore(cutoffDate);
     }
 }

@@ -18,6 +18,15 @@ class UserController {
     private final UserServiceImpl userService;
     private final UserMapper userMapper;
 
+    @GetMapping("/older-than")
+    public List<UserDto> getUsersOlderThan(@RequestParam int age) {
+        return userService.findUsersOlderThan(age)
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
+
+
 
     @GetMapping
     public List<UserDto> getAllUsers() {
