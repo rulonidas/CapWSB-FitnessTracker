@@ -1,6 +1,7 @@
 package pl.wsb.fitnesstracker.user.internal;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.wsb.fitnesstracker.user.api.*;
 
@@ -55,8 +56,8 @@ class UserController {
                 .toList();
     }
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void createUser(@RequestBody CreateUserDto dto) {
-
         User user = new User(
                 dto.firstName(),
                 dto.lastName(),
