@@ -7,6 +7,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,5 +46,15 @@ class UserServiceImpl implements UserService, UserProvider {
     public User findById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow();
+    }
+
+
+    public List<User> findByEmail(String email) {
+        return userRepository.findAll()
+                .stream()
+                .filter(user ->
+                        user.getEmail().toLowerCase()
+                                .contains(email.toLowerCase()))
+                .toList();
     }
 }

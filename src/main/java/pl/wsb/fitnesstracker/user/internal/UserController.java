@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserDto;
+import pl.wsb.fitnesstracker.user.api.UserEmailDto;
 import pl.wsb.fitnesstracker.user.api.UserSimpleDto;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -44,7 +45,13 @@ class UserController {
         User user = userService.findById(id);
         return userMapper.toDto(user);
     }
-
+    @GetMapping("/email")
+    public List<UserEmailDto> getUserByEmail(@RequestParam String email) {
+        return userService.findByEmail(email)
+                .stream()
+                .map(userMapper::toEmailDto)
+                .toList();
+    }
 
 
 }
