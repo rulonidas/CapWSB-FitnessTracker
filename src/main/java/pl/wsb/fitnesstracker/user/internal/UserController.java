@@ -1,15 +1,8 @@
 package pl.wsb.fitnesstracker.user.internal;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import pl.wsb.fitnesstracker.user.api.User;
-import pl.wsb.fitnesstracker.user.api.UserDto;
-import pl.wsb.fitnesstracker.user.api.UserEmailDto;
-import pl.wsb.fitnesstracker.user.api.UserSimpleDto;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+import pl.wsb.fitnesstracker.user.api.*;
 
 import java.util.List;
 
@@ -52,7 +45,18 @@ class UserController {
                 .map(userMapper::toEmailDto)
                 .toList();
     }
+    @PostMapping
+    public void createUser(@RequestBody CreateUserDto dto) {
 
+        User user = new User(
+                dto.firstName(),
+                dto.lastName(),
+                dto.birthdate(),
+                dto.email()
+        );
+
+        userService.createUser(user);
+    }
 
 }
 
