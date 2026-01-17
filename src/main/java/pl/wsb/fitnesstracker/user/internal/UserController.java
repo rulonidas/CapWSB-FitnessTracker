@@ -77,11 +77,26 @@ class UserController {
     @PatchMapping("/{id}")
     public UserDto updateUser(
             @PathVariable Long id,
-            @RequestBody UpdateUserDto dto
+            @RequestBody UserDto dto
     ) {
-        User user = userService.updateUser(id, dto);
-        return userMapper.toDto(user);
+        User user = userService.findById(id);
+
+        if (dto.firstName() != null) {
+            user.updateFirstName(dto.firstName());
+        }
+        if (dto.lastName() != null) {
+            user.updateLastName(dto.lastName());
+        }
+        if (dto.email() != null) {
+            user.updateEmail(dto.email());
+        }
+        if (dto.birthdate() != null) {
+            user.updateBirthdate(dto.birthdate());
+        }
+
+        return userMapper.toDto(userService.createUser(user));
     }
+
 
 }
 
