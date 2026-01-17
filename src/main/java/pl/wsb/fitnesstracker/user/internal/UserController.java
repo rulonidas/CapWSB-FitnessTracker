@@ -74,7 +74,11 @@ class UserController {
         userService.deleteUser(userId);
     }
 
-    @PatchMapping("/{id}")
+    @RequestMapping(
+            value = "/{id}",
+            method = { RequestMethod.PUT, RequestMethod.PATCH },
+            consumes = "application/json"
+    )
     public UserDto updateUser(
             @PathVariable Long id,
             @RequestBody UserDto dto
@@ -96,6 +100,7 @@ class UserController {
 
         return userMapper.toDto(userService.createUser(user));
     }
+
 
 
 }
