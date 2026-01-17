@@ -73,5 +73,15 @@ class UserController {
     public void deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
     }
+
+    @PatchMapping("/{id}")
+    public UserDto updateUser(
+            @PathVariable Long id,
+            @RequestBody UpdateUserDto dto
+    ) {
+        User user = userService.updateUser(id, dto);
+        return userMapper.toDto(user);
+    }
+
 }
 

@@ -13,5 +13,5 @@ public interface UserService {
      * @return The created user
      */
     User createUser(User user);
-
+    User updateUser(Long userID, UpdateUserDto dto);
 }

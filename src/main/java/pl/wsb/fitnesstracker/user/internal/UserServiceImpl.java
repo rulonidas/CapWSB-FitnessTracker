@@ -3,6 +3,7 @@ package pl.wsb.fitnesstracker.user.internal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import pl.wsb.fitnesstracker.user.api.UpdateUserDto;
 import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
@@ -76,4 +77,31 @@ class UserServiceImpl implements UserService, UserProvider {
                 .filter(user -> user.getBirthdate().isBefore(date))
                 .toList();
     }
+    @Override
+    public User updateUser(Long userId, UpdateUserDto dto) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("User not found: " + userId)
+                );
+
+        if (dto.firstName() != null) {
+            user.updateFirstName(dto.firstName());
+        }
+
+        if (dto.lastName() != null) {
+            user.updateLastName(dto.lastName());
+        }
+
+        if (dto.email() != null) {
+            user.updateEmail(dto.email());
+        }
+
+        if (dto.birthdate() != null) {
+            user.updateBirthdate(dto.birthdate());
+        }
+
+        log.info("Updating User {}", user);
+        return userRepository.save(user);
+    }
+
 }
